@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
             {0, 0},                                         // base wave, no visual configs.
             {R.color.colorPrimaryDark, R.dimen.view_speech_wave_stroke},   // bottom wave, transparent, 2 stroke width
             {R.color.colorPrimaryDark, R.dimen.view_speech_wave_stroke},   // middle wave, transparent, 2 stroke width.
-            {R.color.colorAccent,             R.dimen.view_speech_wave_stroke},   // top wave, opaque, 2 stroke width.
+            {R.color.colorAccent,      R.dimen.view_speech_wave_stroke},   // top wave, opaque, 2 stroke width.
     };
     private static final float SMOOTH_ALPHA = 0.5f;
 

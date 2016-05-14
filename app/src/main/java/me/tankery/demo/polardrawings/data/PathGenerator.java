@@ -1,4 +1,4 @@
-package me.tankery.demo.polardrawings;
+package me.tankery.demo.polardrawings.data;
 
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -6,9 +6,12 @@ import android.graphics.PointF;
 import java.util.List;
 
 /**
- * Created by tankery on 1/18/16.
- *
  * Generate path from point set.
+ *
+ * This generator use a cubic Bezier curve to connecting dots, so we can
+ * draw a smooth curve with a few dots.
+ *
+ * Created by tankery on 1/18/16.
  */
 public class PathGenerator {
 

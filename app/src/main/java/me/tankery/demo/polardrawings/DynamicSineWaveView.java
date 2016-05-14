@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import me.tankery.demo.polardrawings.data.PathGenerator;
 import me.tankery.demo.polardrawings.data.SineWaveGenerator;
 
 /**
@@ -91,13 +92,11 @@ public class DynamicSineWaveView extends View {
     };
 
     public DynamicSineWaveView(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
     public DynamicSineWaveView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context, attrs, 0);
     }
 
     public DynamicSineWaveView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -108,9 +107,9 @@ public class DynamicSineWaveView extends View {
     private void init() {
         if (isInEditMode()) {
             addWave(1.0f, 0.5f, 0, 0, 0);
-            addWave(0.5f, 2.5f, 0, Color.YELLOW, 2);
+            addWave(0.5f, 2.5f, 0, Color.BLUE, 2);
             addWave(0.3f, 2f, 0, Color.RED, 2);
-            setBaseWaveAmplitudeFactor(1);
+            setBaseWaveAmplitudeScale(1);
             createComputationThread().tick();
             return;
         }
@@ -163,25 +162,37 @@ public class DynamicSineWaveView extends View {
         wavePaints.clear();
     }
 
+    /**
+     * Start to animate the sine waves.
+     */
     public void startAnimation() {
         transferData.startAnimateTime = SystemClock.uptimeMillis();
         removeCallbacks(animateTicker);
         ViewCompat.postOnAnimation(this, animateTicker);
     }
 
+    /**
+     * Stop the sine waves.
+     */
     public void stopAnimation() {
         removeCallbacks(animateTicker);
     }
 
-    public void setBaseWaveAmplitudeFactor(float factor) {
-        baseWaveAmplitudeFactor = factor;
+    /**
+     * Scale sine waves.
+     * @param scale set the scale for sine waves.
+     */
+    public void setBaseWaveAmplitudeScale(float scale) {
+        baseWaveAmplitudeFactor = scale;
     }
 
     public float getBaseWaveAmplitudeFactor() {
         return baseWaveAmplitudeFactor;
     }
 
-    // Update just one frame.
+    /**
+     * Update just one frame.
+     */
     public void requestUpdateFrame() {
         synchronized (transferData.requestCondition) {
             transferData.requestFutureChange = true;
